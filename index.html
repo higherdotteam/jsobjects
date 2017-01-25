@@ -1,0 +1,32 @@
+<html>
+  <head>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div id="d1"></div>
+    <div><input onclick="window.t.render();" type="button" value="Render"/></div>
+    <script>
+
+function Thing(data) {
+  this.data = data;
+}
+Thing.prototype.render = function() {
+  list = "";
+  for (var i=0; i<this.data.players.length; i++) {
+    list += '<input type="text" value="' + this.data.players[i] + '"/>';
+  }
+  $('#d1').html('<h1>' + this.data['sport'] + '</h1>' +
+      '<br/>' + 
+      'Players:' +
+      list);
+};
+
+window.t = new Thing({sport: 'tennis', 
+                   players: ['Roger Federer', 'Rafael Nadal', 'Novak Djokovic', 
+                             'Andy Murray', 'Stan Wawrinka']});
+window.t.render();
+
+
+    </script>
+  </body>
+</html>
