@@ -1,4 +1,4 @@
-<html>
+  <html>
   <head>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   </head>
@@ -6,27 +6,33 @@
     <div id="d1"></div>
     <div><input onclick="window.t.render();" type="button" value="Render"/></div>
     <script>
-
-function Thing(data) {
-  this.data = data;
-}
-Thing.prototype.render = function() {
-  list = "";
-  for (var i=0; i<this.data.players.length; i++) {
-    list += '<input type="text" value="' + this.data.players[i] + '"/>';
-  }
-  $('#d1').html('<h1>' + this.data['sport'] + '</h1>' +
-      '<br/>' + 
-      'Players:' +
-      list);
-};
-
-window.t = new Thing({sport: 'tennis', 
-                   players: ['Roger Federer', 'Rafael Nadal', 'Novak Djokovic', 
-                             'Andy Murray', 'Stan Wawrinka']});
-window.t.render();
-
-
+		function Thing(data) {
+		  this.data = data;
+		}
+		
+		Thing.prototype.render = function() {
+		
+		  list = "";
+		  
+		  for (var i=0; i<this.data.length; i++) {
+			list += '<table><tr><td><hr><u>' + this.data[i].name + "</u><br><br><img src='" + this.data[i].image + "'/>" + "<br><br>" + this.data[i].text + '</td></tr></table><br>';
+		  }
+		  
+		  $('#d1').html(list);
+		};
+		
+		window.t = new Thing([{image: "https://s3.amazonaws.com/uifaces/faces/twitter/chadengle/128.jpg",
+							name: "Jordan Smith",
+							text: "In other news, China is about to beat us to Exascale computing, believed to be the order of processing power of the human brain at neural level."},
+							{image: "https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/128.jpg",
+							name: "Jessica Smith",
+							text: "Happy New Year Everyone! We just posted on our blog about our experience at CES."},
+							{image: "https://s3.amazonaws.com/uifaces/faces/twitter/zack415/128.jpg",
+							name: "Garrett Smith",
+							text: "I made a streaming music station for Asia but then it started playing Europe. Continental drift on an unforgivable scale. No."}]);
+		
+		window.t.render();
+		
     </script>
   </body>
 </html>
