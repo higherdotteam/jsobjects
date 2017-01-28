@@ -4,7 +4,7 @@
   </head>
   <body>
     <div id="d1"></div>
-    <div id="template" style="display: none;"><span class="name">Bob Smith</span><img src=""/> &nbsp;<span class="text">blah</span></div>
+    <div id="template" style="display: none;"><span class="name">Bob Smith</span><img src="" class="image"/> &nbsp;<span class="text">blah</span></div>
     <div><input onclick="window.t.render();" type="button" value="Render"/></div>
     <script>
 		function Thing(data) {
@@ -16,14 +16,15 @@
 		  list = "";
 		  
 		  for (var i=0; i<this.data.length; i++) {
-       // this.data[i].image  
-       // this.data[i].text 
-        var t = $('#template').clone();
-        $(t).find('.name').html(this.data[i].name);
-        t.appendTo('#d1')
-		$(t).find('.text').html(this.data[i].text);
-		t.appendTo('#d1');
-        t.show();
+ 
+			var t = $('#template').clone();
+			$(t).find('.name').html(this.data[i].name);
+			t.appendTo('#d1')
+			$(t).find('.image').attr('src', this.data[i].image);
+			t.appendTo('#d1')
+			$(t).find('.text').html(this.data[i].text);
+			t.appendTo('#d1');
+			t.show();
 		  }
 		  
 		}
