@@ -4,7 +4,7 @@
   </head>
   <body>
     <div id="d1"></div>
-    <div id="template" style="display: none;"><span>Bob Smith</span><img src=""/><span>blah</span></div>
+    <div id="template" style="display: none;"><span class="name">Bob Smith</span><img src=""/> &nbsp;<span>blah</span></div>
     <div><input onclick="window.t.render();" type="button" value="Render"/></div>
     <script>
 		function Thing(data) {
@@ -16,11 +16,14 @@
 		  list = "";
 		  
 		  for (var i=0; i<this.data.length; i++) {
-			list += '<table><tr><td><hr><u>' + this.data[i].name + "</u><br><br><img src='" + this.data[i].image + "'/>" + "<br><br>" + this.data[i].text + '</td></tr></table><br>';
+       // this.data[i].image  
+       // this.data[i].text 
+        var t = $('#template').clone();
+        $(t).find('.name').html(this.data[i].name);
+        t.appendTo('#d1')
+        t.show();
 		  }
 		  
-		  var t = $('#template').clone();
-		  t.appendTo('#d1').show();
 		}
 		
 		window.t = new Thing([{image: "https://s3.amazonaws.com/uifaces/faces/twitter/chadengle/128.jpg",
@@ -33,7 +36,7 @@
 							name: "Garrett Smith",
 							text: "I made a streaming music station for Asia but then it started playing Europe. Continental drift on an unforgivable scale. No."}]);
 		
-		window.t.render();
+		//window.t.render();
 		
     </script>
   </body>
