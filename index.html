@@ -4,7 +4,9 @@
   </head>
   <body>
     <div id="d1"></div>
-    <div id="template" style="display: none;"><span class="name">Bob Smith</span><img src="" class="image"/> &nbsp;<span class="text">blah</span></div>
+    <div id="template" style="display: none;"><span class="name">Bob Smith</span><br><img src="" class="image"/> &nbsp;<span class="text">blah</span>
+	<br><textarea rows="4" cols="35" placeholder="Enter your comment here..."></textarea><br><span><input type="submit" value="comment"/></span><br><br></div>
+	<br>
     <div><input onclick="window.t.render();" type="button" value="Render"/></div>
     <script>
 		function Thing(data) {
@@ -20,7 +22,7 @@
 			var t = $('#template').clone();
 			$(t).find('.name').html(this.data[i].name);
 			t.appendTo('#d1')
-			$(t).find('.image').attr('src', this.data[i].image);
+			$(t).find('.image').attr('src',this.data[i].image);
 			t.appendTo('#d1')
 			$(t).find('.text').html(this.data[i].text);
 			t.appendTo('#d1');
