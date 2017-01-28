@@ -4,7 +4,7 @@
   </head>
   <body>
     <div id="d1"></div>
-    <div id="template" style="display: block;"><span>Bob Smith</span><img src=""/><span>blah</span></div>
+    <div id="template" style="display: none;"><span>Bob Smith</span><img src=""/><span>blah</span></div>
     <div><input onclick="window.t.render();" type="button" value="Render"/></div>
     <script>
 		function Thing(data) {
@@ -20,7 +20,7 @@
 		  }
 		  
 		  var t = $('#template').clone();
-		  t.appendTo('#d1');
+		  t.appendTo('#d1').show();
 		}
 		
 		window.t = new Thing([{image: "https://s3.amazonaws.com/uifaces/faces/twitter/chadengle/128.jpg",
