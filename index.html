@@ -4,7 +4,7 @@
   </head>
   <body>
     <div id="d1"></div>
-    <div id="template" style="display: none;"><span>Bob Smith</span><img src=""/><span>blah</span></div>
+    <div id="template" style="display: block;"><span>Bob Smith</span><img src=""/><span>blah</span></div>
     <div><input onclick="window.t.render();" type="button" value="Render"/></div>
     <script>
 		function Thing(data) {
@@ -19,8 +19,9 @@
 			list += '<table><tr><td><hr><u>' + this.data[i].name + "</u><br><br><img src='" + this.data[i].image + "'/>" + "<br><br>" + this.data[i].text + '</td></tr></table><br>';
 		  }
 		  
-		  $('#d1').html(list);
-		};
+		  var t = $('#template').clone();
+		  t.appendTo('#d1');
+		}
 		
 		window.t = new Thing([{image: "https://s3.amazonaws.com/uifaces/faces/twitter/chadengle/128.jpg",
 							name: "Jordan Smith",
