@@ -4,7 +4,7 @@
   </head>
   <body>
     <div id="d1"></div>
-    <div id="template" style="display: none;"><span class="name">Bob Smith</span><img src=""/> &nbsp;<span>blah</span></div>
+    <div id="template" style="display: none;"><span class="name">Bob Smith</span><img src=""/> &nbsp;<span class="text">blah</span></div>
     <div><input onclick="window.t.render();" type="button" value="Render"/></div>
     <script>
 		function Thing(data) {
@@ -21,6 +21,8 @@
         var t = $('#template').clone();
         $(t).find('.name').html(this.data[i].name);
         t.appendTo('#d1')
+		$(t).find('.text').html(this.data[i].text);
+		t.appendTo('#d1');
         t.show();
 		  }
 		  
