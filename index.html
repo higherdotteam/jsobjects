@@ -9,10 +9,15 @@
 	<br>
     <div><input onclick="window.t.render();" type="button" value="Render"/></div>
     <script>
-		function Thing(data) {
-		  this.data = data;
+		function Thing(url) {
+		  this.url = url;
+      this.data = [];
 		}
 		
+		Thing.prototype.getData = function() {
+      // use url to get data and put in this.data, then render will work
+    }
+
 		Thing.prototype.render = function() {
 		
 		  list = "";
@@ -31,15 +36,8 @@
 		  
 		}
 		
-		window.t = new Thing([{image: "https://s3.amazonaws.com/uifaces/faces/twitter/chadengle/128.jpg",
-							name: "Jordan Smith",
-							text: "In other news, China is about to beat us to Exascale computing, believed to be the order of processing power of the human brain at neural level."},
-							{image: "https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/128.jpg",
-							name: "Jessica Smith",
-							text: "Happy New Year Everyone! We just posted on our blog about our experience at CES."},
-							{image: "https://s3.amazonaws.com/uifaces/faces/twitter/zack415/128.jpg",
-							name: "Garrett Smith",
-							text: "I made a streaming music station for Asia but then it started playing Europe. Continental drift on an unforgivable scale. No."}]);
+		window.t = new Thing("http://127.0.0.1:8888/posts.php");
+    t.getData();
 		
 		//window.t.render();
 		
