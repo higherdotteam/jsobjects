@@ -11,12 +11,19 @@
     <script>
 		function Thing(url) {
 		  this.url = url;
-      this.data = [];
+		  this.data = [];
 		}
 		
 		Thing.prototype.getData = function() {
-      // use url to get data and put in this.data, then render will work
-    }
+		// use url to get data and put in this.data, then render will work
+			$.ajax({
+			  type: "GET",
+			  url: this.url,
+			  success: function(data){
+			  this.data += data;
+			  }
+			});
+		}
 
 		Thing.prototype.render = function() {
 		
@@ -36,8 +43,8 @@
 		  
 		}
 		
-		window.t = new Thing("http://127.0.0.1:8888/posts.php");
-    t.getData();
+		window.t = new Thing("http://127.0.0.1:80/posts.php");
+		t.getData();
 		
 		//window.t.render();
 		
