@@ -5,7 +5,7 @@
   <body>
     <div id="d1"></div>
     <div id="template" style="display: none;"><span class="name">Bob Smith</span><br><img src="" class="image"/> &nbsp;<span class="text">blah</span>
-	<br><textarea rows="4" cols="35" placeholder="Enter your comment here..."></textarea><br><span><input type="submit" onclick="test();" value="comment"/></span><br><br></div>
+	<br><textarea rows="4" cols="35" placeholder="Enter your comment here..."></textarea><br><span><input type="submit" onclick="window.t.comment();" value="comment"/></span><br><br></div>
 	<br>
     <div><input onclick="window.t.render();" type="button" value="Render"/></div>
     <script>
@@ -29,8 +29,17 @@
 			});
 		}
 		
-		function test(){
-			console.log('hi');
+		Thing.prototype.comment = function(){
+			var self = this;
+		
+			$.ajax({
+			  type: "POST",
+			  url: 'handle_comments.php',
+			  success: function(data){
+			    console.log('hi');
+				self.data = data;
+			  }
+			});
 		}
 
 		Thing.prototype.render = function() {
