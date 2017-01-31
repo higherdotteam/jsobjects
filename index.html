@@ -16,12 +16,12 @@
 		
 		Thing.prototype.getData = function() {
 		// use url to get data and put in this.data, then render will work
+      var self = this;
 			$.ajax({
 			  type: "GET",
 			  url: this.url,
-			  success: function(data){
-			  console.log('data', data);
-			  this.data = data;
+			  success: function(data);
+			  self.data = data;
 			  window.t.render();
 			  console.log(data);
 			  }
