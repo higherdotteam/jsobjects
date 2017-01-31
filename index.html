@@ -5,7 +5,7 @@
   <body>
     <div id="d1"></div>
     <div id="template" style="display: none;"><span class="name">Bob Smith</span><br><img src="" class="image"/> &nbsp;<span class="text">blah</span>
-	<br><textarea rows="4" cols="35" placeholder="Enter your comment here..."></textarea><br><span><input type="submit" value="comment"/></span><br><br></div>
+	<br><textarea rows="4" cols="35" placeholder="Enter your comment here..."></textarea><br><span><input type="submit" onclick="test();" value="comment"/></span><br><br></div>
 	<br>
     <div><input onclick="window.t.render();" type="button" value="Render"/></div>
     <script>
@@ -15,17 +15,22 @@
 		}
 		
 		Thing.prototype.getData = function() {
-		// use url to get data and put in this.data, then render will work
-      var self = this;
+			// use url to get data and put in this.data, then render will work
+			var self = this;
+			
 			$.ajax({
 			  type: "GET",
 			  url: this.url,
-			  success: function(data);
+			  success: function(data){
+			  console.log('data', data);
 			  self.data = data;
 			  window.t.render();
-			  console.log(data);
 			  }
 			});
+		}
+		
+		function test(){
+			console.log('hi');
 		}
 
 		Thing.prototype.render = function() {
@@ -47,9 +52,7 @@
 		}
 		
 		window.t = new Thing("http://127.0.0.1:80/posts.php");
-		console.log('about to render');
 		t.getData();
-		console.log('done');
 		
 		window.t.render();
 		
