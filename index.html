@@ -4,8 +4,13 @@
   </head>
   <body>
     <div id="d1"></div>
-    <div id="template" style="display: none;"><span class="name">Bob Smith</span><br><img src="" class="image"/> &nbsp;<span class="text">blah</span>
-	<br><textarea rows="4" cols="35" placeholder="Enter your comment here..."></textarea><br><span><input type="submit" onclick="window.t.comment();" value="comment"/></span><br><br></div>
+    <div id="template" style="display: none;">
+		<span class="name">Bob Smith</span><br><img src="" class="image"/>&nbsp;<span class="text">blah</span><br>
+		<form>
+		<br><textarea id="words" name="comment" rows="4" cols="45" placeholder="Enter your comment here..."></textarea><br>
+		<span><input type="submit" onclick="window.t.comment(); return false;" value="comment"/></span><br><br>
+		</form>
+	</div>
 	<br>
     <div><input onclick="window.t.render();" type="button" value="Render"/></div>
     <script>
@@ -22,23 +27,25 @@
 			  type: "GET",
 			  url: this.url,
 			  success: function(data){
-			  console.log('data', data);
-			  self.data = data;
-			  window.t.render();
+				console.log('data', data);
+				self.data = data;
+				window.t.render();
 			  }
 			});
 		}
 		
 		Thing.prototype.comment = function(){
-			var self = this;
+			var userComment = $('#words').val();
+			console.log(userComment);
 		
 			$.ajax({
-			  type: "POST",
-			  url: 'handle_comments.php',
-			  success: function(data){
-			    console.log('hi');
-				self.data = data;
-			  }
+				type: "POST",
+				data: {"comment": userComment},
+				dataType: "text",
+				url: "http://127.0.0.1:80/handle_comments.php",
+				success: function(data){
+					console.log('This is a test of ', data);
+				}
 			});
 		}
 
