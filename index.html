@@ -8,7 +8,7 @@
 		<span class="name">Bob Smith</span><br><img src="" class="image"/>&nbsp;<span class="text">blah</span><br>
 		<form>
 		<br><textarea id="words" name="comment" rows="4" cols="45" placeholder="Enter your comment here..."></textarea><br>
-		<span><input type="submit" onclick="window.t.comment(); return false;" value="comment"/></span><br><br>
+		<span><input class="btn" type="submit" id="n" onclick="window.t.comment(event); return false;" value="comment"/></span><br><br>
 		</form>
 	</div>
 	<br>
@@ -34,13 +34,15 @@
 			});
 		}
 		
-		Thing.prototype.comment = function(){
+		Thing.prototype.comment = function(e){
 			var userComment = $('#words').val();
-			console.log(userComment);
+			console.log($(e.target).attr("id"));
+			var newsfeedId = $(e.target).attr("id").split("-")[1];
+			
 		
 			$.ajax({
 				type: "POST",
-				data: {"comment": userComment},
+				data: {"comment": userComment, "newsfeed_id": newsfeedId},
 				dataType: "text",
 				url: "http://127.0.0.1:80/handle_comments.php",
 				success: function(data){
@@ -61,6 +63,8 @@
 			$(t).find('.image').attr('src',this.data[i].image);
 			t.appendTo('#d1')
 			$(t).find('.text').html(this.data[i].text);
+			t.appendTo('#d1');
+			$(t).find('.btn').attr("id", "n-" + this.data[i].newsfeed_id);
 			t.appendTo('#d1');
 			t.show();
 		  }

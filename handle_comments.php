@@ -1,5 +1,5 @@
 <?php
-echo $_POST["comment"];
+echo $_POST["comment"] . "|" . $_POST["newsfeed_id"];
 /*$comment = $_POST["comment"];
 
 $connection = @mysqli_connect('127.0.0.1', 'root', 'root', 'fb') or die("Could not connect.");
