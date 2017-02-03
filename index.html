@@ -1,13 +1,22 @@
   <html>
   <head>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <style>
+	#cmt_section {
+		background-color: lightblue;
+		width: 50%;
+		border-radius: 4px;
+		padding: 10px;
+	}
+  </style>
   </head>
   <body>
     <div id="d1"></div>
     <div id="template" style="display: none;">
 		<span class="name">Bob Smith</span><br><img src="" class="image"/>&nbsp;<span class="text">blah</span><br>
+		<div id="cmt_section"></div>
 		<form>
-		<br><textarea id="words" name="comment" rows="4" cols="45" placeholder="Enter your comment here..."></textarea><br>
+		<br><textarea class="txt" id="w" name="comment" rows="4" cols="45" placeholder="Enter your comment here..."></textarea><br>
 		<span><input class="btn" type="submit" id="n" onclick="window.t.comment(event); return false;" value="comment"/></span><br><br>
 		</form>
 	</div>
@@ -35,9 +44,9 @@
 		}
 		
 		Thing.prototype.comment = function(e){
-			var userComment = $('#words').val();
 			console.log($(e.target).attr("id"));
 			var newsfeedId = $(e.target).attr("id").split("-")[1];
+			var userComment = $('#w-' + newsfeedId).val();
 			
 		
 			$.ajax({
@@ -46,7 +55,8 @@
 				dataType: "text",
 				url: "http://127.0.0.1:80/handle_comments.php",
 				success: function(data){
-					console.log('This is a test of ', data);
+					console.log(data);
+					$("#cmt_section").html(data);
 				}
 			});
 		}
@@ -64,7 +74,11 @@
 			t.appendTo('#d1')
 			$(t).find('.text').html(this.data[i].text);
 			t.appendTo('#d1');
-			$(t).find('.btn').attr("id", "n-" + this.data[i].newsfeed_id);
+			$(t).find('#cmt_section').html(this.data[i].comments.comment);
+			t.appendTo('#d1');
+			$(t).find('.btn').attr("id", "n-" + this.data[i].id);
+			t.appendTo('#d1');
+			$(t).find('.txt').attr("id", "w-" + this.data[i].id);
 			t.appendTo('#d1');
 			t.show();
 		  }
